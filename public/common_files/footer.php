@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Footer</title>
+</head>
+<body>
+	<div class="footer-1">
+				<div class="list-1">
+					<ul>
+						<li><a href="homepage">HOME</a></li>
+						<li>NEW PROJECT</li>
+						<li>SPECIAL</li>
+						<li>ALL PRODUCTS</li>
+						<li>REVIEWS</li>
+						<li>CONTACT</li>
+						<li>FAQS</li>
+					</ul>
+				</div>
+				<div class="footer-2">
+					<p>Copyright <i class="fa fa-copyright" aria-hidden="true"></i>2013 Enest.Privacy Notice</p>
+				</div>
+	</div>
+
+</body>
+</html>
