@@ -13,7 +13,7 @@ use App\Models\Cart;
 
 class IController extends Controller
 {
-    //*************************************Insert Data******************************************
+    //************************Insert Data********************************
 
     public function insert_data(Request $request)
     {
@@ -38,30 +38,37 @@ class IController extends Controller
         }
         return redirect('/addproject');
     }
-    //*******************************Views****************************
+
+    //************************Views*************************
+
     public function login_page()
     {
         return view('/login');
     }
+
     public function contact_us()
     {
         return view('contact');
     }
+
     public function dis_pro()
     {
         return view('products');
     }
+
     public function add_project()
     {
         return view('addproduct');
     }
+
     public function all_products()
     {
         $data = Product::paginate(10);
         return view('allproducts', compact('data'));
     }
 
-    //******************************SignUp******************************
+    //****************SignUp********************
+
     public function signup_details_submit(Request $request)
     {
         $email = $request->get('email');
@@ -80,7 +87,8 @@ class IController extends Controller
         }
     }
 
-    //*********************************Login****************************************
+    //*********************Login********************
+
     public function login_details_submit(Request $request)
     {
         $email = $request->get('email');
@@ -95,23 +103,25 @@ class IController extends Controller
         }
     }
 
-    //**********************Log Out***********************
+    //****************Log Out*******************
+
     public function logout_page()
     {
         Session::flush();
         return redirect('login-page');
     }
 
-    //********************************HomePage*********************************
+    //**************HomePage*******************
+
     public function home_page()
     {
         $data = Product::paginate(10);
         $category = Category::paginate(10);
         return view('home', compact('data', 'category'));
     }
-    // public function search_product(){}
 
-    //***********************(Display Products)*********************
+    //*********Display Products***********
+
     public function display_category($id)
     {
         $pro = Product::where('category_id', $id)->get();
@@ -119,7 +129,8 @@ class IController extends Controller
         return view('products', compact('pro', 'cat'));
     }
 
-    //*******************************Contact Us(Insert Data)**********************************
+    //**********Contact Us(Insert Data)*******
+
     public function contact_us_data(Request $request)
     {
         $add = new Contact;
@@ -132,13 +143,13 @@ class IController extends Controller
         return redirect('/contact');
     }
 
-    //****************************************Cart***************************************
+    //************Cart****************
+
     public function my_cart($id)
     {
         $data = Product::select('*')->where(['id' => $id])->get();
         $category = Category::paginate(10);
         return view('cart', compact('data', 'category'));
-        // return print_r($data);
     }
 
     public function add_to_cart(Request $request)
@@ -161,14 +172,17 @@ class IController extends Controller
         }
         return back();
     }
+
     public function check_out($id)
     {
         $data = Cart::select('*')->where(['userId' => $id])->get();
         $items=0;
         $sum = 0;
+
         foreach ($data as $row) {
             $items = $items + 1;
         }
+        
         foreach ($data as $row) {
             $sum = $sum + $row->productPrice;
         }
@@ -184,12 +198,13 @@ class IController extends Controller
         return back();
     }
 
-    //****************************************Display Cart***************************************
+    //**************Display Cart****************
     
     public function c_o($id)
     {
         $data = Cart::select('*')->where(['userId' => $id])->get();
         $sum = 0;
+
         foreach ($data as $row) {
             $sum = $sum + $row->productPrice;
         }
@@ -197,7 +212,7 @@ class IController extends Controller
         return view('co', compact('data','totalprice'));
     }
 
-    //****************************************Checkout***************************************
+    //****************Checkout*******************
 
     public function ct(Request $request, $id){
         $add = Signup::select('*')->where(['id' => $id])->first();
@@ -209,10 +224,4 @@ class IController extends Controller
     }
 }
 
-// public function search_categogy($id)
-//     {
-//         $data1 = Category::get();
-//         $data = Category::find($id);
-//         $a=$data->category_name;
-//         return view('all_product',compact('data1'),['images' => Product::where('p_category', 'LIKE','%'. $a .'%')->Paginate()]);
-//     }
+
